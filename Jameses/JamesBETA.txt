@@ -1,0 +1,86 @@
+package jamesTBA;
+/* useful crap:
+ * https://codereview.stackexchange.com/questions/9999/text-based-rpg-in-java?rq=1
+ * https://codereview.stackexchange.com/questions/164540/simple-text-based-rpg-in-java
+ */
+//this thing is very broken as of now, but at least cleaner than the firstver
+//it's a beta, sort of?
+import java.util.Scanner;
+
+public class James {
+	
+	Scanner command = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		James newgame;
+		newgame = new James();
+		
+		newgame.beginCave();
+		newgame.errorSomething();
+		newgame.anteChamber();
+		
+		
+	}	
+	
+	public class Creature {
+
+		public String name;
+		public String desc;
+		public String battledesc;
+		public int HP;
+		public int ATK;
+		
+		public void Scuttler() {
+			HP = 7;
+			ATK = 4;
+			name = "Scuttler";
+			desc = "A small humanoid, roughly 1.5m tall. Its eyes are huge and blank, and its skin is ghostly white.";
+			battledesc = "It may be frail, but it can climb walls and has some very stabby claws.";
+		
+		}
+		
+		public void Dragger() {
+			HP = 10;
+			ATK = 3;
+			name = "Dragger";
+			desc = "About 2.5m tall, this thing has dark fur, muscles, and glowy blue eyes. Its arms are huge.";
+			battledesc = "It can cast magic, but it's more likely to bite you.";
+		}
+	
+}
+		String response;
+
+
+		public void beginCave() {
+			System.out.println("Your name is James.");
+			System.out.println("Around you is a cave. It's dark and dingy and smells like bat poop.");
+			System.out.println("Within reach is a rock. You can 'get rock', if you like.");
+			System.out.println("What do you do?");
+			response = command.nextLine();
+			
+			if (response.contentEquals("walk forward")) {
+				anteChamber();
+			}
+			else if (response.contentEquals("give scuttler stats"));
+			System.out.println("HP: 7; ATK: 3");
+		}
+		
+		public void anteChamber() {
+			System.out.println("\nYou step through the archway. You can't really see anything anymore.");
+			System.out.println("To your left and right are walls. In front of you lies only darkness.");
+			System.out.println("What do you do?");
+			response = command.nextLine();
+			
+			if (response.equals("walk forward")) {
+				System.out.println("You walk forward.");
+			}
+		}
+		
+		public void errorSomething() {
+			System.out.println("Invalid command, probably.");
+		}
+	
+
+	
+
+} 

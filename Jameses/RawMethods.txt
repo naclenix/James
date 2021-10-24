@@ -1,0 +1,537 @@
+/*package org.enix;
+
+public class JMSMethods {
+		
+		int jamesHP;
+		int draggerHP;
+		int scuttlerHP;
+		int mp;
+		
+
+		String playerWeapon;
+		String itemPassive;
+		String armor;
+		String key;
+		String response;
+		
+		public static void main(String[] args) {
+			JamesBROKEN newgame;
+			newgame = new JamesBROKEN();	
+			
+			newgame.beginCave();
+			newgame.errorSomething();
+			newgame.placeholderEnding();
+			newgame.anteChamber();
+			newgame.rightTunnel();
+			newgame.eastHall();
+			newgame.walkLeft();
+			newgame.walkBack();
+			newgame.anteBattle();
+			newgame.beginCaveAgain();
+			newgame.attack();
+			newgame.anteBattleWon();
+			newgame.fungusRoom();
+			newgame.fungusHouse();
+			newgame.greetIt();
+		}
+		
+		public void beginCave() {
+			jamesHP = 10;
+			scuttlerHP = 7;
+			draggerHP = 10;
+			playerWeapon = "fist";
+			
+			console.setText("-Your name is James.");
+			console.setText("Around you is a cave. It's dark and dingy and smells like bat poop. You are facing north.");
+			console.setText("To your left, within reach, is a small 'rock'. It looks dull and uninteresting.");
+			console.setText("Commands are: 'get <object>', 'walk <direction'>, 'use <object>'.");
+			console.setText("Directions are west, east, north, and south.");
+			console.setText("When in doubt, press enter.");
+			console.setText("What do you do?");
+		
+			
+		
+			if(response.equals("get rock")) {
+				console.setText("-You picked up the rock. You feel slightly more confident.");
+				playerWeapon = "rock";
+				beginCaveAgain();
+			}
+		
+			else if(response.equals("walk west")) {
+				walkLeft();
+			}
+		
+		
+			else if(response.equals("walk east")) {
+				console.setText("-You walk east. The floor seems to slope down, you notice.");
+				rightTunnel();
+			}
+		
+			else if(response.equals("walk north")) {
+				anteChamber();
+			}
+			
+			else if(response.contentEquals("walk south")) {
+				walkBack();
+			}
+			
+			else if(response.equalsIgnoreCase("debug antebattle rock")) {
+				playerWeapon = "rock";
+				anteBattle();
+			}
+			
+			else if(response.equalsIgnoreCase("debug antebattle")) {
+				anteBattle();
+			}
+			
+			else if(response.equalsIgnoreCase("debug righttunnel")) {
+				rightTunnel();
+			}
+			
+			else if(response.contentEquals("debug fungushouse")) {
+				fungusHouse();
+			}
+			
+			else {
+				errorSomething();
+				beginCave();
+			}
+		}
+				
+		public void beginCaveAgain() {
+			if (playerWeapon != "rock") {
+			console.setText("-Around you is a cave. It still has a rock.");
+			console.setText("You can pick up the rock, or you can go somewhere.");
+			console.setText("What do you do?");		
+			
+			if(response.equals("get rock")) {
+				console.setText("-You picked up the rock. You feel slightly more confident.");
+				playerWeapon = "rock";
+				beginCaveAgain();
+			}
+			
+			else if(response.equals("walk west")) {
+				walkLeft();
+			}
+			
+			
+			else if(response.equals("walk east")) {
+				console.setText("-You walk right. The floor seems to slope down, you notice.");
+				rightTunnel(); 
+			}
+			
+			else if(response.equals("walk north")) {
+				anteChamber();
+			}
+			
+			else if(response.equals("walk south")) {
+				walkBack();
+			}
+			
+			else {
+				errorSomething();
+				beginCaveAgain();
+			}
+		}
+			
+			else {
+				console.setText("-Around you is a cave. The rock is gone.");
+				console.setText("You can go somewhere. There isn't really anything to use the rock on yet.");
+				console.setText("What do you do?");
+				
+				
+
+				
+				if(response.equals("walk west")) {
+					walkLeft();
+				}
+				
+				
+				else if(response.equals("walk east")) {
+					console.setText("-You walk right. The floor seems to slope down, you notice.");
+					rightTunnel(); 
+				}
+				
+				else if(response.equals("walk north")) {
+					anteChamber();
+				}
+				
+				else if(response.contentEquals("walk south")) {
+					walkBack();
+				}
+				else {
+					errorSomething();
+					beginCaveAgain();
+				}
+				
+			}
+
+		
+			
+			if(response.equals("get rock")) {
+				console.setText("-You picked up the rock. You feel slightly more confident.");
+				playerWeapon = "rock";
+				beginCaveAgain();
+			}
+			
+			else if(response.equals("walk west")) {
+				walkLeft();
+			}
+			
+			
+			else if(response.equals("walk east")) {
+				console.setText("-You walk right. The floor seems to slope down, you notice.");
+				rightTunnel(); 
+			}
+			
+			else if(response.equals("walk north")) {
+				anteChamber();
+			}
+			
+			else {
+				errorSomething();
+				beginCaveAgain();
+			}
+
+		}
+		
+		public void walkLeft() {
+			if(itemPassive != "torch") {
+				console.setText("-After a few steps, you bump into a wall. There seems to be nothing of interest here.");
+				console.setText("Turn back? ('y' or 'n')");
+			
+				
+			
+				if(response.equals("y")) {
+					beginCaveAgain();
+				}
+			
+				else if(response.equals("n")) {
+					console.setText("-You stay at the wall for awhile. You feel more relaxed.");
+					console.setText("Press enter to turn back.");
+					
+					if(response.isEmpty()) {
+						beginCaveAgain();
+					}
+				}
+			
+				else {
+					errorSomething();
+					walkLeft();
+				}
+			}
+			else if(itemPassive == "torch") {
+				console.setText("After a few steps, the light of your torch illuminates the left wall.");
+				console.setText("There seem to be faint carvings here, and an oddly-shaped hole, about a centimeter wide.");
+				console.setText("What do you do?");			}
+		}
+		
+		public void walkBack() {
+			console.setText("-You contemplate walking backwards, but turn around and walk the normal way after a few seconds.");
+			console.setText("It's just not really worth it. Nobody's here to see you except yourself.");
+			console.setText("The floor becomes steep after a little while, and the air grows warm and humid.");
+			console.setText("Press enter to go south. Or, you can 'walk north'.");
+						
+						if(response.isEmpty()) {
+				fungusRoom();
+			}
+			else if(response.equals("walk north")) {
+				console.setText("-You turn around. This space can wait for another time. Or maybe never.");
+				beginCaveAgain();
+			}
+		}
+		
+		public void anteChamber() {
+			console.setText("-You step through the archway.");
+			console.setText("You can't see much beyond it, but judging by the echo of your footsteps, whatever space you stepped into is massive.");
+			console.setText("You know there are walls to your left and right. In front of you, there is nothing but darkness.");
+			console.setText("What do you do?");
+						
+			if(response.equals("walk north")) {
+				anteBattle();
+			}
+			
+			else if(response.contentEquals("walk south")) {
+				beginCaveAgain();
+			}
+			
+			else {
+				errorSomething();
+				anteChamber();
+			}
+
+		}
+		
+		public void anteBattle() {
+			console.setText("As you walk, you begin to notice a shuffling sound coming from behind you.");
+			console.setText("\n-It's getting closer.");
+			console.setText("\n-Two blue orbs emerge from the thick darkness.");
+			console.setText("\n-You can 'attack' or 'run'.");
+			console.setText("What do you do?");			
+			
+			if(response.equals("attack")) {
+				console.setText("-It snarls, probably baring teeth. You can't really tell.");
+				console.setText("Enter to continue.");
+				attack();
+			}
+			
+			else if(response.contentEquals("run")) {
+				placeholderEnding();
+			}
+			
+			else {
+				errorSomething();
+				anteBattle();
+			}
+			
+		}
+		
+		public void rightTunnel() {
+			console.setText("-At some point, you feel the air grow cold and stale. The ground seems to level off.");
+			console.setText("You turn a corner. In front of you are what seem to be floating yellow pinpricks of light.");
+			console.setText("What do you do?");			
+			
+			if (response.contentEquals("walk east")) {
+				console.setText("-The pinpricks begin to move as you walk, drifting and bobbing as if in some breeze, though there is none.");
+				eastHall();
+			
+			}
+			
+			else {
+				errorSomething();
+				rightTunnel();
+			}
+		}
+		
+		public void fungusRoom() {
+			console.setText("-The ground becomes squishy under your feet. The air smells vaguely of rot- but of what kind, you're not sure.");
+			console.setText("Bioluminescent mushrooms begin carpeting the walls, faintly pulsing. They seem to get larger the further you descend.");
+			console.setText("You step through a giant mushroom archway of sorts and enter a cavernous space.");
+			console.setText("It is very well-lit by the untold thousands of giant fungi growing everywhere. The stench becomes overwhelming.");
+			console.setText("You can 'walk south' or 'walk north', but that's about it. What do you do?");			
+			
+			if(response.equals("walk north")) {
+				console.setText("-You turn back. This room is gross, and you don't really want to deal with it right now.");
+				beginCaveAgain();
+			}
+			
+			else if(response.equals("walk south")) {
+				fungusHouse();
+			}
+			
+			else {
+				errorSomething();
+				fungusRoom();
+			}
+		}
+		
+		public void attack() {
+			int jamesDamage =0;
+			
+			if(playerWeapon.equals("rock")) {
+				jamesDamage = new java.util.Random().nextInt(5);
+			}
+			
+			else if(playerWeapon.equals("fist")){
+				jamesDamage = new java.util.Random().nextInt(3); 
+			}			
+			
+			console.setText("The dragger took " + jamesDamage + " damage.");
+			draggerHP = draggerHP - jamesDamage;
+			
+			if(draggerHP<1) { 
+				anteBattleWon(); 
+			} 
+			
+			else if(draggerHP>0) {
+				int draggerDamage =0;
+				
+				draggerDamage = new java.util.Random().nextInt(4);
+				
+				console.setText("It swipes at you with a massive arm. You take " + draggerDamage + " damage.");
+				
+				jamesHP = jamesHP - draggerDamage; 
+				console.setText("Your health is now " + jamesHP + ".");
+				
+				if(jamesHP < 1) {
+					gameover();
+				}
+				else if(jamesHP < 5 && (jamesHP > 3)) {
+					console.setText("You start to feel woozy.");
+					attack();
+				}
+				else if(jamesHP > 0 && (response.isEmpty())) {
+					attack();
+				}
+				
+				else if(jamesHP > 0 && (response.contentEquals("attack"))) {
+					console.setText("(You can just 'enter' to continue in this battle.)");
+					attack();
+				}
+				
+				else if(jamesHP > 0 && (response.equals("run"))) {
+					anteChamber();
+				}
+			}
+			
+		}
+		
+		public void anteBattleWon() {
+			console.setText("-The dragger falls to the ground in front of you with a thump.");
+			console.setText("Its eyelights are still burning, starting to consume its face in blue flame.");
+			console.setText("If you wanna loot this thing, as you probably do, you'll want to do it fast.");
+			console.setText("'Loot' it, use <item>, or walk <direction>?");			
+			
+			if(response.equalsIgnoreCase("loot")) {
+				console.setText("-You found a 'dragger rock' in what you really, really hope is a pouch of some sort.");
+				console.setText("It's slimy, but it glows faintly blue.");
+				console.setText("There's not much else besides fur and gore. Seriously, why did you want to loot it?");
+				playerWeapon = "dragger rock";
+				placeholderEnding();
+			}
+			else if(response.equals("use stick") && (itemPassive == "stick")) {
+				console.setText("-You dip the stick in the eyefire, which is really just facefire now.");
+				console.setText("It is now a torch!");
+				console.setText("Despite its small size, the wood itself doesn't seem to be burning.");
+				//i'm probably gonna use something better, but it's the idea that counts
+				itemPassive = "blue torch";
+				
+				placeholderEnding();
+			}
+			else if(response.equals("use rock")&& (playerWeapon == "rock")) {
+				console.setText("-You throw the rock at the dragger.");
+				console.setText("It does nothing except make a small sqeaking noise where it hits.");
+				console.setText("You pick it back up again, mildly disgusted.");
+				anteBattleWon();
+			}
+			else if(response.equals("walk north")&& (itemPassive != "blue torch")) {
+				console.setText("-You blindly step over the dragger's body, avoiding the flames.");
+				placeholderEnding();
+			}
+			else if(response.equals("walk north")&& (itemPassive == "blue torch")) {
+			  console.setText("-You navigate around the dragger's body.");
+			  console.setText("With your newfound torch, you can see that it is about 2m long and has blunt claws at the end of its arms.");
+			  console.setText("You suppose they were the cause of the scraping.");
+			  placeholderEnding();
+			  }
+			 
+			else {
+				errorSomething();
+				anteBattleWon();
+			}
+		}
+		
+		public void eastHall() {
+			console.setText("There are walls about an arm's length from you. The lights make sure you see that.");
+			console.setText("As you walk, they seem to become more numerous until the entire hall is bathed in yellow light.");
+			console.setText("You never hit any of them, though. They always sway out of the way at the last second.");
+			console.setText("It's a little creepy, honestly.");
+			console.setText("What do you do?");
+		}
+		
+		
+		public void fungusHouse() {
+			if(mp == 0) {
+				console.setText("-You forage onward through the mushrooms, which squish as you touch them.");
+				console.setText("Suddenly, the ceiling of the cavern disappears from view.");
+				console.setText("The mushrooms seem the same height here, and their stalks form walls.");
+				console.setText("You realize you just walked into someone's house. You keep walking, because of course you do.");
+				console.setText("\n-There seems to be a person here. I say 'seems' because its skin is faintly pulsing with tendrils of light.");
+				console.setText("You could 'greet' them, I guess. Or, you could 'nope' the heck out of there.");
+				
+			
+				if(response.equals("nope")) {
+					console.setText("-You run away. Nopenopenopenope. Not dealing with creepy mushroom people today.");
+					fungusRoom();
+				}
+			
+				else if(response.contentEquals("greet")) {
+					console.setText("-You wave to the mushroom person. The line on its face curves upwards.");
+					greetIt();
+				}
+			}
+			else if((mp == 1)&& (armor == "shroomplate")) {
+				console.setText("-The mushrooms still glow faintly, and the house is still there.");
+				console.setText("You suspect the pile is still there, too.");
+				console.setText("Something's telling you there's not much for you here. You think it's the narrative text.");
+				console.setText("You could 'walk south', or 'walk north' outta there. What do you do?");
+				placeholderEnding();
+			}
+			
+			else if((mp == 1)&& (armor != "shroomplate")) {
+				console.setText("-The mushrooms still glow faintly, and the house is still there.");
+				console.setText("You suspect the pile is still there, too.");
+				console.setText("Maybe it did something. Was that what the mushroomperson was talking about?");
+				console.setText("You could 'walk south', or 'walk north' outta there. What do you do?");
+				placeholderEnding();
+			}
+		}
+		
+		//
+		
+		public void greetIt() {
+			console.setText(">James\n>Hello James  you are  lost");
+			console.setText("\n-You barely hear the words. It sounds like several different voices are whispering from its mouth.");
+			console.setText("\n>James\n>Don't  turn  your  back  on  the  body");
+			console.setText("\n-You wonder what body it means, when the mushroom person just kinda... sinks into a pile on the floor.");
+			console.setText("Uh. You wanna 'loot' it? You could just 'walk north' and get outta there. You might be able to use something, too.");
+			mp = 1;			
+			if(response.equals("loot")) {
+				armor = "shroomplate";
+				jamesHP = 15;
+				shroomPlateGot();
+			}
+			
+			else if(response.equals("walk north")) {
+				console.setText("-You leave the pile as it is."); 
+				fungusRoom();
+			}
+			
+			
+			else if((armor != "shroomplate")&& (mp == 1)) {
+				console.setText("-You return to the pile. It's just as slimy as you remembered.");
+				console.setText("You think you should maybe 'loot' it this time.");
+				placeholderEnding();
+			}
+			
+			else if((armor == "shroomplate")&& (mp == 1)) {
+				console.setText("The pile's still there. It's gross slimy, and missing a plate that you currently are wearing on your chest.");
+				console.setText("You don't think there's much else here besides the mushrooms.");
+				console.setText("What do you do?");
+				
+				if (response.equals("walk north"));
+				fungusRoom();
+			}
+				
+		}
+
+		public void shroomPlateGot() {
+			console.setText("-You begin to root through the pile, which is lukewarm and slimy and you're beginning to regret it.");
+			console.setText("After about a minute of digging, your hands hit something hard.");
+			console.setText("You pull out of the pile a 'plate'. It's a sheet of... something, covered in strands of mycelium.");
+			console.setText("You strap it to your chest, because carrying this thing around with your hands would be very stupid.");
+			console.setText("Satisfied with your work, you look around. There doesn't seem to be much else here besides the exit.");			
+			if (response.equals("walk north")) {
+				console.setText("You turn back, feeling just a bit safer.");
+				fungusRoom();
+			}
+		}
+		
+		public void gameover() {
+			console.setText("--GAME OVER. NOTHING FORSEEABLE PAST THIS POINT.");
+			
+		}
+		
+		public void placeholderEnding() {
+			console.setText("\n--This is the end of James as of now. You most likely reached an unfinished bit.");			
+			
+		}
+		
+		public void errorSomething() {
+			console.setText("-Invalid command, probably. \n Press enter to continue.");
+			
+		}
+		
+	}
+
+*/

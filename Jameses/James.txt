@@ -1,0 +1,211 @@
+package org.enix;
+/*TODO: if response.isEmpty();
+ * make the key room, and make the BOSS ROOM that the key unlocks.
+ * make most of the rooms just descriptions, so you don't have to else/if everything for variables.
+ * add all the missing elses
+ * make fungusperson less annoying
+ * create class for items. please.
+ * boolean for player rock, check if it's there or not for begincave. probably don't need bgcaveagain.
+ * matrix matrix matrix matrix use a matrix for your cave map
+ * 
+ */
+
+import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class James extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2367565226425306715L;
+	private static JPanel contentPane;
+	private static JTextArea console;
+	private static JTextField userInput;
+	
+	private static Monster dragger;
+	
+	private static String playerWeapon;
+	private static String itemPassive;
+	private static String armor;
+	private static int key;
+	private static int bg;
+	private static String response;
+	
+	//private static String[][] map = new String[5][5];
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+	
+		dragger = new Monster(10, 4);
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					James frame = new James();
+					frame.setTitle("This be cave.");
+					frame.setVisible(true);
+					beginCave();
+					errorSomething();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public James() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		console = new JTextArea();
+		console.setBounds(10, 11, 800, 215);
+		console.setEditable(false);
+		contentPane.add(console);
+		
+		userInput = new JTextField();
+		userInput.setBounds(10, 230, 800, 20);
+		contentPane.add(userInput);
+		userInput.setColumns(10);
+		userInput.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(KeyEvent e){ 
+
+                if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    runChecks(getText());
+                }       
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                
+            }
+        }
+    );
+	}
+	
+	private static String getText() {
+		String line = userInput.getText();
+		userInput.setText("");
+		if(line != null) {
+			return line;
+		}
+		
+		else {
+			return "";
+		}
+	}
+	
+	public void runChecks(String response) {
+		if(response.contains("get rock")&& (bg == 0)) {
+			console.append("\n-You picked up the rock. You feel slightly more confident.");
+			playerWeapon = "rock";
+			bg = 1;
+			beginCave();
+		}	
+	}
+		/*TODO: Methods */
+
+
+		private static void beginCave() {
+			playerWeapon = "fist";
+			bg = 0;
+			
+			if ((playerWeapon != "rock")&& (bg == 0)) {
+			console.setText("--Your name is James.\n");
+			console.append("You are currently in a cave. It's dark and dingy and smells like bat poop.\n");
+			console.append("You can only get a rock right now, because this version is throwing me "
+					+ "nullpointerexceptions left and right,\n");
+			console.append("and I don't want to screw things up more than I have already.\n");
+			console.append("What do you do?");
+			
+			
+			/*
+			else if(response.equals("walk west")) {
+				walkLeft();
+			}
+			
+			
+			else if(response.equals("walk east")) {
+				console.setText("-You walk right. The floor seems to slope down, you notice.");
+				rightTunnel(); 
+			}
+			
+			else if(response.equals("walk north")) {
+				anteChamber();
+			}
+			
+			else if(response.equals("walk south")) {
+				walkBack();
+			}
+			*/
+		
+		}
+			
+			else if(bg == 1) {
+				console.setText("-Around you is a cave. The rock is gone.");
+				console.append("You can go somewhere. There isn't really anything to use the rock on yet.");
+				console.append("What do you do?");
+				
+				
+				if(response.contentEquals("nothing")) {
+					beginCave();
+				}
+				
+				/*if(response.equals("walk west")) {
+					walkLeft();
+				}
+				
+				
+				else if(response.equals("walk east")) {
+					console.setText("-You walk right. The floor seems to slope down, you notice.");
+					rightTunnel(); 
+				}
+				
+				else if(response.equals("walk north")) {
+					anteChamber();
+				}
+				
+				else if(response.contentEquals("walk south")) {
+					walkBack();
+				}*/
+				else {
+					console.append("hsfudhtgo;th");
+					beginCave();
+				}
+			}
+		}
+
+		
+			
+	
+	
+	
+	private static void errorSomething() {
+		console.setText("-Invalid command, probably. \n Press enter to continue.");
+	}
+	
+}

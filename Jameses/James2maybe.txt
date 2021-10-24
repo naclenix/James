@@ -1,0 +1,565 @@
+package org.enix;
+/*TODO: if response.isEmpty();
+ * make the key room, and make the BOSS ROOM that the key unlocks.
+ * make most of the rooms just descriptions, so you don't have to else/if everything for variables.
+ * add all the missing elses
+ * make fungusperson less annoying
+ * class or something
+ * 
+ */
+
+
+import java.util.Scanner;
+
+public class JamesBROKEN {
+	
+	int jamesHP;
+	int draggerHP;
+	int scuttlerHP;
+	int mp;
+	
+	Scanner command = new Scanner(System.in);
+	String playerWeapon;
+	String itemPassive;
+	String armor;
+	String key;
+	String response;
+	
+	public static void main(String[] args) {
+		JamesBROKEN newgame;
+		newgame = new JamesBROKEN();	
+		
+		newgame.beginCave();
+		newgame.errorSomething();
+		newgame.placeholderEnding();
+		newgame.anteChamber();
+		newgame.rightTunnel();
+		newgame.eastHall();
+		newgame.walkLeft();
+		newgame.walkBack();
+		newgame.anteBattle();
+		newgame.beginCaveAgain();
+		newgame.attack();
+		newgame.anteBattleWon();
+		newgame.fungusRoom();
+		newgame.fungusHouse();
+		newgame.greetIt();
+	}
+	
+	public void beginCave() {
+		jamesHP = 10;
+		scuttlerHP = 7;
+		draggerHP = 10;
+		playerWeapon = "fist";
+		
+		System.out.println("-Your name is James.");
+		System.out.println("Around you is a cave. It's dark and dingy and smells like bat poop. You are facing north.");
+		System.out.println("To your left, within reach, is a small 'rock'. It looks dull and uninteresting.");
+		System.out.println("Commands are: 'get <object>', 'walk <direction'>, 'use <object>'.");
+		System.out.println("Directions are west, east, north, and south.");
+		System.out.println("When in doubt, press enter.");
+		System.out.println("What do you do?");
+	
+		response = command.nextLine();
+	
+		if(response.equals("get rock")) {
+			System.out.println("-You picked up the rock. You feel slightly more confident.");
+			playerWeapon = "rock";
+			beginCaveAgain();
+		}
+	
+		else if(response.equals("walk west")) {
+			walkLeft();
+		}
+	
+	
+		else if(response.equals("walk east")) {
+			System.out.println("-You walk east. The floor seems to slope down, you notice.");
+			rightTunnel();
+		}
+	
+		else if(response.equals("walk north")) {
+			anteChamber();
+		}
+		
+		else if(response.contentEquals("walk south")) {
+			walkBack();
+		}
+		
+		else if(response.equalsIgnoreCase("debug antebattle rock")) {
+			playerWeapon = "rock";
+			anteBattle();
+		}
+		
+		else if(response.equalsIgnoreCase("debug antebattle")) {
+			anteBattle();
+		}
+		
+		else if(response.equalsIgnoreCase("debug righttunnel")) {
+			rightTunnel();
+		}
+		
+		else if(response.contentEquals("debug fungushouse")) {
+			fungusHouse();
+		}
+		
+		else {
+			errorSomething();
+			beginCave();
+		}
+	}
+			
+	public void beginCaveAgain() {
+		if (playerWeapon != "rock") {
+		System.out.println("-Around you is a cave. It still has a rock.");
+		System.out.println("You can pick up the rock, or you can go somewhere.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if(response.equals("get rock")) {
+			System.out.println("-You picked up the rock. You feel slightly more confident.");
+			playerWeapon = "rock";
+			beginCaveAgain();
+		}
+		
+		else if(response.equals("walk west")) {
+			walkLeft();
+		}
+		
+		
+		else if(response.equals("walk east")) {
+			System.out.println("-You walk right. The floor seems to slope down, you notice.");
+			rightTunnel(); 
+		}
+		
+		else if(response.equals("walk north")) {
+			anteChamber();
+		}
+		
+		else if(response.equals("walk south")) {
+			walkBack();
+		}
+		
+		else {
+			errorSomething();
+			beginCaveAgain();
+		}
+	}
+		
+		else {
+			System.out.println("-Around you is a cave. The rock is gone.");
+			System.out.println("You can go somewhere. There isn't really anything to use the rock on yet.");
+			System.out.println("What do you do?");
+			
+			response = command.nextLine();
+
+			
+			if(response.equals("walk west")) {
+				walkLeft();
+			}
+			
+			
+			else if(response.equals("walk east")) {
+				System.out.println("-You walk right. The floor seems to slope down, you notice.");
+				rightTunnel(); 
+			}
+			
+			else if(response.equals("walk north")) {
+				anteChamber();
+			}
+			
+			else if(response.contentEquals("walk south")) {
+				walkBack();
+			}
+			else {
+				errorSomething();
+				beginCaveAgain();
+			}
+			
+		}
+
+	
+		
+		if(response.equals("get rock")) {
+			System.out.println("-You picked up the rock. You feel slightly more confident.");
+			playerWeapon = "rock";
+			beginCaveAgain();
+		}
+		
+		else if(response.equals("walk west")) {
+			walkLeft();
+		}
+		
+		
+		else if(response.equals("walk east")) {
+			System.out.println("-You walk right. The floor seems to slope down, you notice.");
+			rightTunnel(); 
+		}
+		
+		else if(response.equals("walk north")) {
+			anteChamber();
+		}
+		
+		else {
+			errorSomething();
+			beginCaveAgain();
+		}
+
+	}
+	/*TODO: First Rooms*/
+	public void walkLeft() {
+		if(itemPassive != "torch") {
+			System.out.println("-After a few steps, you bump into a wall. There seems to be nothing of interest here.");
+			System.out.println("Turn back? ('y' or 'n')");
+		
+			response = command.nextLine();
+		
+			if(response.equals("y")) {
+				beginCaveAgain();
+			}
+		
+			else if(response.equals("n")) {
+				System.out.println("-You stay at the wall for awhile. You feel more relaxed.");
+				System.out.println("Press enter to turn back.");
+				response = command.nextLine();
+				if(response.isEmpty()) {
+					beginCaveAgain();
+				}
+			}
+		
+			else {
+				errorSomething();
+				walkLeft();
+			}
+		}
+		else if(itemPassive == "torch") {
+			System.out.println("After a few steps, the light of your torch illuminates the left wall.");
+			System.out.println("There seem to be faint carvings here, and an oddly-shaped hole, about a centimeter wide.");
+			System.out.println("What do you do?");
+			response = command.nextLine();
+		}
+	}
+	
+	public void walkBack() {
+		System.out.println("-You contemplate walking backwards, but turn around and walk the normal way after a few seconds.");
+		System.out.println("It's just not really worth it. Nobody's here to see you except yourself.");
+		System.out.println("The floor becomes steep after a little while, and the air grows warm and humid.");
+		System.out.println("Press enter to go south. Or, you can 'walk north'.");
+		
+		response = command.nextLine();
+		
+		if(response.isEmpty()) {
+			fungusRoom();
+		}
+		else if(response.equals("walk north")) {
+			System.out.println("-You turn around. This space can wait for another time. Or maybe never.");
+			beginCaveAgain();
+		}
+	}
+	
+	public void anteChamber() {
+		System.out.println("-You step through the archway.");
+		System.out.println("You can't see much beyond it, but judging by the echo of your footsteps, whatever space you stepped into is massive.");
+		System.out.println("You know there are walls to your left and right. In front of you, there is nothing but darkness.");
+		System.out.println("What do you do?");
+		
+		response = command.nextLine();
+		
+		if(response.equals("walk north")) {
+			anteBattle();
+		}
+		
+		else if(response.contentEquals("walk south")) {
+			beginCaveAgain();
+		}
+		
+		else {
+			errorSomething();
+			anteChamber();
+		}
+
+	}
+	
+	public void anteBattle() {
+		System.out.println("As you walk, you begin to notice a shuffling sound coming from behind you.");
+		System.out.println("\n-It's getting closer.");
+		System.out.println("\n-Two blue orbs emerge from the thick darkness.");
+		System.out.println("\n-You can 'attack' or 'run'.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if(response.equals("attack")) {
+			System.out.println("-It snarls, probably baring teeth. You can't really tell.");
+			System.out.println("Enter to continue.");
+			attack();
+		}
+		
+		else if(response.contentEquals("run")) {
+			placeholderEnding();
+		}
+		
+		else {
+			errorSomething();
+			anteBattle();
+		}
+		
+	}
+	
+	public void rightTunnel() {
+		System.out.println("-At some point, you feel the air grow cold and stale. The ground seems to level off.");
+		System.out.println("You turn a corner. In front of you are what seem to be floating yellow pinpricks of light.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if (response.contentEquals("walk east")) {
+			System.out.println("-The pinpricks begin to move as you walk, drifting and bobbing as if in some breeze, though there is none.");
+			eastHall();
+		
+		}
+		
+		else {
+			errorSomething();
+			rightTunnel();
+		}
+	}
+	/*TODO: Adv Rooms*/
+	public void fungusRoom() {
+		System.out.println("-The ground becomes squishy under your feet. The air smells vaguely of rot- but of what kind, you're not sure.");
+		System.out.println("Bioluminescent mushrooms begin carpeting the walls, faintly pulsing. They seem to get larger the further you descend.");
+		System.out.println("You step through a giant mushroom archway of sorts and enter a cavernous space.");
+		System.out.println("It is very well-lit by the untold thousands of giant fungi growing everywhere. The stench becomes overwhelming.");
+		System.out.println("You can 'walk south' or 'walk north', but that's about it. What do you do?");
+		response = command.nextLine();
+		
+		if(response.equals("walk north")) {
+			System.out.println("-You turn back. This room is gross, and you don't really want to deal with it right now.");
+			beginCaveAgain();
+		}
+		
+		else if(response.equals("walk south")) {
+			fungusHouse();
+		}
+		
+		else {
+			errorSomething();
+			fungusRoom();
+		}
+	}
+	
+	public void attack() {
+		int jamesDamage =0;
+		
+		if(playerWeapon.equals("rock")) {
+			jamesDamage = new java.util.Random().nextInt(5);
+		}
+		
+		else if(playerWeapon.equals("fist")){
+			jamesDamage = new java.util.Random().nextInt(3); 
+		}
+		response = command.nextLine();
+		
+		System.out.println("The dragger took " + jamesDamage + " damage.");
+		draggerHP = draggerHP - jamesDamage;
+		
+		if(draggerHP<1) { 
+			anteBattleWon(); 
+		} 
+		
+		else if(draggerHP>0) {
+			int draggerDamage =0;
+			
+			draggerDamage = new java.util.Random().nextInt(4);
+			
+			System.out.println("It swipes at you with a massive arm. You take " + draggerDamage + " damage.");
+			
+			jamesHP = jamesHP - draggerDamage; 
+			System.out.println("Your health is now " + jamesHP + ".");
+			
+			if(jamesHP < 1) {
+				gameover();
+			}
+			else if(jamesHP < 5 && (jamesHP > 3)) {
+				System.out.println("You start to feel woozy.");
+				attack();
+			}
+			else if(jamesHP > 0 && (response.isEmpty())) {
+				attack();
+			}
+			
+			else if(jamesHP > 0 && (response.contentEquals("attack"))) {
+				System.out.println("(You can just 'enter' to continue in this battle.)");
+				attack();
+			}
+			
+			else if(jamesHP > 0 && (response.equals("run"))) {
+				anteChamber();
+			}
+		}
+		
+	}
+	
+	public void anteBattleWon() {
+		System.out.println("-The dragger falls to the ground in front of you with a thump.");
+		System.out.println("Its eyelights are still burning, starting to consume its face in blue flame.");
+		System.out.println("If you wanna loot this thing, you should do it fast.");
+		System.out.println("'Loot' it, use <item>, or walk <direction>?");
+		response = command.nextLine();
+		
+		if(response.equalsIgnoreCase("loot")) {
+			System.out.println("-You found a 'dragger rock' in what you really, really hope is a pouch of some sort.");
+			System.out.println("It's slimy, but it glows faintly blue.");
+			System.out.println("There's not much else besides fur and gore.");
+			playerWeapon = "dragger rock";
+			placeholderEnding();
+		}
+		else if(response.equals("use stick") && (itemPassive == "stick")) {
+			System.out.println("-You dip the stick in the eyefire, which is really just facefire now.");
+			System.out.println("It is now a torch!");
+			System.out.println("Despite its small size, the wood itself doesn't seem to be burning.");
+			//i'm probably gonna use something better, but it's the idea that counts
+			itemPassive = "blue torch";
+			
+			placeholderEnding();
+		}
+		else if(response.equals("use rock")&& (playerWeapon == "rock")) {
+			System.out.println("-You throw the rock at the dragger.");
+			System.out.println("It does nothing except make a small sqeaking noise where it hits.");
+			System.out.println("You pick it back up again, mildly disgusted.");
+			anteBattleWon();
+		}
+		else if(response.equals("walk north")&& (itemPassive != "blue torch")) {
+			System.out.println("-You blindly step over the dragger's body, avoiding the flames.");
+			placeholderEnding();
+		}
+		else if(response.equals("walk north")&& (itemPassive == "blue torch")) {
+		  System.out.println("-You navigate around the dragger's body.");
+		  System.out.println("With your newfound torch, you can see that it is about 2m long and has blunt claws at the end of its arms.");
+		  System.out.println("You suppose they were the cause of the scraping.");
+		  placeholderEnding();
+		  }
+		 
+		else {
+			errorSomething();
+			anteBattleWon();
+		}
+	}
+	
+	public void eastHall() {
+		System.out.println("There are walls about an arm's length from you. The lights make sure you see that.");
+		System.out.println("As you walk, they seem to become more numerous until the entire hall is bathed in yellow light.");
+		System.out.println("You never hit any of them, though. They always sway out of the way at the last second.");
+		System.out.println("It's a little creepy, honestly.");
+		System.out.println("What do you do?");
+	}
+	
+	/*TODO: Fungus Encounter*/
+	public void fungusHouse() {
+		if(mp == 0) {
+			System.out.println("-You forage onward through the mushrooms, which squish as you touch them.");
+			System.out.println("Suddenly, the ceiling of the cavern disappears from view.");
+			System.out.println("The mushrooms seem the same height here, and their stalks form walls.");
+			System.out.println("You realize you just walked into someone's house. You keep walkin\g.");
+			System.out.println("\n-There seems to be a person here. I say 'seems' because its skin is faintly pulsing with tendrils of light.");
+			System.out.println("You could 'greet' them, I guess. Or, you could 'nope' the heck out of there.");
+			response = command.nextLine();
+		
+			if(response.equals("nope")) {
+				System.out.println("-You run away. Nopenopenopenope. Not dealing with creepy mushroom people today.");
+				fungusRoom();
+			}
+		
+			else if(response.contentEquals("greet")) {
+				System.out.println("-You wave to the mushroom person. The line on its face curves upwards.");
+				greetIt();
+			}
+		}
+		else if((mp == 1)&& (armor == "shroomplate")) {
+			System.out.println("-The mushrooms still glow faintly, and the house is still there.");
+			System.out.println("You suspect the pile is still there, too.");
+			System.out.println("Something's telling you there's not much for you here. You think it's the narrative text.");
+			System.out.println("You could 'walk south', or 'walk north' outta there. What do you do?");
+			placeholderEnding();
+		}
+		
+		else if((mp == 1)&& (armor != "shroomplate")) {
+			System.out.println("-The mushrooms still glow faintly, and the house is still there.");
+			System.out.println("You suspect the pile is still there, too.");
+			System.out.println("Maybe it did something. Was that what the mushroomperson was talking about?");
+			System.out.println("You could 'walk south', or 'walk north' out of there. What do you do?");
+			placeholderEnding();
+		}
+	}
+	
+	//TODO: Mushroom Person Encounter
+	
+	public void greetIt() {
+		System.out.println(">James\n>Hello James  you are  lost");
+		System.out.println("\n-You barely hear the words. It sounds like several different voices are whispering from its mouth.");
+		System.out.println("\n>James\n>Don't  turn  your  back  on  the  body");
+		System.out.println("\n-You wonder what body it means, when the mushroom person just kinda... sinks into a pile on the floor.");
+		System.out.println("Uh. You wanna 'loot' it? You could just 'walk north' and get outta there. "
+				+ "You might be able to use something, too.");
+		mp = 1;
+		response = command.nextLine();
+		
+		if(response.equals("loot")) {
+			armor = "shroomplate";
+			jamesHP = 15;
+			shroomPlateGot();
+		}
+		
+		else if(response.equals("walk north")) {
+			System.out.println("-You leave the pile as it is."); 
+			fungusRoom();
+		}
+		
+		
+		else if((armor != "shroomplate")&& (mp == 1)) {
+			System.out.println("-You return to the pile. It's just as slimy as you remembered.");
+			System.out.println("You think you should maybe 'loot' it this time.");
+			placeholderEnding();
+		}
+		
+		else if((armor == "shroomplate")&& (mp == 1)) {
+			System.out.println("-The pile's still there. It's gross slimy, and missing a plate that you currently are wearing on your chest.");
+			System.out.println("You don't think there's much else here besides the mushrooms.");
+			System.out.println("What do you do?");
+			
+			if (response.equals("walk north"));
+			fungusRoom();
+		}
+			
+	}
+
+	public void shroomPlateGot() {
+		System.out.println("-You begin to root through the pile, which is lukewarm and slimy and you're beginning to regret it.");
+		System.out.println("After about a minute of digging, your hands hit something hard.");
+		System.out.println("You pull out of the pile a 'plate'. It's a sheet of... something, covered in strands of mycelium.");
+		System.out.println("You strap it to your chest, because carrying this thing around with your hands would be very stupid.");
+		System.out.println("Satisfied with your work, you look around. There doesn't seem to be much else here besides the exit.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if (response.equals("walk north")) {
+			System.out.println("You turn back, feeling just a bit safer.");
+			fungusRoom();
+		}
+	}
+	
+	public void gameover() {
+		System.out.println("--GAME OVER. NOTHING FORSEEABLE PAST THIS POINT.");
+		response = command.nextLine();
+	}
+	
+	public void placeholderEnding() {
+		System.out.println("\n--This is the end of James as of now. You most likely reached an unfinished bit.");
+		response = command.nextLine();
+		
+	}
+	
+	public void errorSomething() {
+		System.out.println("-Invalid command, probably. \n Press enter to continue.");
+		response = command.nextLine();
+	}
+	
+}

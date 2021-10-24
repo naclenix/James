@@ -1,0 +1,37 @@
+package org.enix;
+
+import java.util.Random;
+
+public class Monster {
+
+	private int hp;
+	private int maxDamage;
+	private boolean isDead;
+	
+	public Monster(int hp, int maxDamage) {
+		this.hp = hp;
+		this.maxDamage = maxDamage;
+		this.isDead = false;
+	}
+	
+	public void setHP(int hp) {
+		this.hp = hp;
+		
+		if(this.hp <= 0) {
+			this.isDead = true;
+		}
+	}
+	
+	public int getHP() {
+		return this.hp;
+	}
+	
+	public int getDamage() {
+		Random r = new Random();
+		return r.nextInt(this.maxDamage + 1);
+	}
+	
+	public boolean isDead() {
+		return this.isDead;
+	}
+}

@@ -1,0 +1,210 @@
+package oldstablevers;
+
+import java.util.Scanner;
+
+public class JamesBROKEN {
+	// horrible mess
+	Scanner command = new Scanner(System.in);
+	String playerWeapon;
+	String response;
+	int jamesHP;
+	int draggerHP;
+	int scuttlerHP;
+	
+	public static void main(String[] args) {
+		JamesBROKEN newgame;
+		newgame = new JamesBROKEN();	
+		
+		newgame.beginCave();
+		newgame.errorSomething();
+		newgame.placeholderEnding();
+		newgame.anteChamber();
+		newgame.rightTunnel();
+		newgame.walkLeft();
+		newgame.anteBattle();
+		newgame.beginCaveAgain();
+		newgame.attack();
+
+	}
+		public void beginCave() {
+		
+		jamesHP = 10;
+		scuttlerHP = 7;
+		draggerHP = 10;
+		playerWeapon = "fist";
+		
+	System.out.println("Your name is James.");
+	System.out.println("Around you is a cave. It's dark and dingy and smells like bat poop.");
+	System.out.println("To your left, within reach, is a small rock. It looks dull and uninteresting.");
+	System.out.println("Commands are: 'get <object>', 'walk <direction'>, 'use <object>'.");
+	System.out.println("Directions are left, right, forward, and backward.");
+	System.out.println("Press enter to advance a line.");
+	System.out.println("What do you do?");
+	
+	response = command.nextLine();
+	
+	if (response.equals("get rock")) {
+		System.out.println("You picked up the rock. You feel slightly more confident.");
+		playerWeapon = "rock";
+		beginCaveAgain(); }
+	
+	else if (response.equals("walk left")) {
+		walkLeft(); }
+	
+	
+	else if (response.equals("walk right")) {
+		System.out.println("You walk right. The floor seems to slope down, you notice.");
+		rightTunnel(); }
+	
+	else if (response.equals("walk forward")) {
+		anteChamber();
+	  }
+	}
+			
+	public void beginCaveAgain() {
+		System.out.println("Around you is a cave. It may or may not still have a rock.");
+		System.out.println("You can pick up the rock, if you don't already have it. Or, you can go somewhere.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if (response.equals("get rock")) {
+			System.out.println("You picked up the rock. You feel slightly more confident.");
+			playerWeapon = "rock";
+			beginCaveAgain(); }
+		
+		else if (response.equals("walk left")) {
+			walkLeft(); }
+		
+		
+		else if (response.equals("walk right")) {
+			System.out.println("You walk right. The floor seems to slope down, you notice.");
+			rightTunnel(); 
+			}
+		
+		else if (response.equals("walk forward")) {
+			anteChamber();
+		  } 
+		else {
+			System.out.println("Invalid command.");
+		}
+
+	}
+	
+	public void walkLeft() {
+		System.out.println("After a few steps, you bump into a wall. There seems to be nothing of interest here.");
+		System.out.println("Turn back? ('y' or 'n')");
+		
+		response = command.nextLine();
+		
+		if(response.equals("y")) {
+			
+			beginCaveAgain();
+		}
+		else if (response.equals("n")) {
+			System.out.println("You stay at the wall for awhile. You feel more relaxed.");
+			System.out.println("Enter anything to turn back.");
+			response = command.nextLine();
+			if (response.contains("")) {
+				beginCaveAgain();
+				
+			}
+		}
+		else {
+			System.out.println("Invalid command.");
+		}
+	}
+	
+	public void anteChamber() {
+		System.out.println("You step through the archway.");
+		System.out.println("You can't see much beyond it, but judging by the echo of your footsteps, whatever space you stepped into is massive.");
+		System.out.println("You know there are walls to your left and right. In front of you, there is nothing but darkness.");
+		System.out.println("What do you do?");
+		
+		response = command.nextLine();
+		
+			if (response.equals("walk forward")) {
+				System.out.println("You can feel the darkness pressing on you like a blanket.");
+				anteBattle();
+			}
+
+		}
+	
+	public void anteBattle() {
+		System.out.println("As you walk, you begin to notice a shuffling sound coming from behind you.");
+		System.out.println("\nIt's getting closer.");
+		System.out.println("\n\nTwo blue orbs emerge from the thick darkness.");
+		System.out.println("\nYou can attack or run.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if (response.equals("attack")) {
+			attack();
+		}
+	}
+	public void rightTunnel() {
+		System.out.println("At some point, you feel the air grow cold and stale. The ground seems to level off.");
+		System.out.println("You turn a corner. In front of you are what seem to be floating blue pinpricks of light.");
+		System.out.println("What do you do?");
+		response = command.nextLine();
+		
+		if (response.contentEquals("walk forward")) {
+			System.out.println("You walk forward.");
+			placeholderEnding();
+		
+		}
+		else {
+			System.out.println("Invalid command.");
+		}
+	}
+	
+	public void attack() {
+		response = command.nextLine();
+		int jamesDamage =0;
+		if (playerWeapon.equals("rock")) {
+			jamesDamage = new java.util.Random().nextInt(5);
+		}
+		else if(playerWeapon.equals("fist")){
+			jamesDamage = new java.util.Random().nextInt(3); 
+		}
+		System.out.println("The dragger took " + jamesDamage + " damage.");
+		draggerHP = draggerHP - jamesDamage;
+		
+		if(draggerHP<1) { 
+			gameover(); 
+		} 
+		
+		else if(draggerHP>0) {
+			int draggerDamage =0;
+			
+			draggerDamage = new java.util.Random().nextInt(4);
+			
+			System.out.println("It swipes at you with a massive arm. You take " + draggerDamage + " damage.");
+			
+			jamesHP = jamesHP - draggerDamage; 
+			System.out.println("Your health is now " + jamesHP + " .");
+			
+			if (jamesHP < 1) {
+				placeholderEnding();
+			}
+			else if (jamesHP > 0) {
+				attack();
+			}
+		}
+	}
+	public void gameover() {
+		System.out.println("GAME OVER. NOTHING FORSEEABLE PAST THIS POINT.");
+		response = command.nextLine();
+	}
+	public void placeholderEnding() {
+		System.out.println("\nThis is the end of James as of now.");
+		
+		response = command.nextLine();
+		
+	}
+	
+	public void errorSomething() {
+		System.out.println("Invalid command, probably.");
+		response = command.nextLine();
+	}
+}
+	
